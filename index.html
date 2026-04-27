@@ -331,28 +331,27 @@
   <nav>
     <div class="nav-inner">
       <a href="#" class="nav-logo">Abra</a>
-      <a href="#waitlist" class="nav-cta">Join waitlist</a>
+      <a href="#signup" class="nav-cta">Sign up</a>
     </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-label">Now in private beta</div>
+    <div class="hero-label">Now live</div>
     <h1>Your clients expect a professional.<br>Now you can <span>show them one</span>.</h1>
     <p>Abra gives freelance personal trainers professional invoices, client records, and an AI assistant that helps you deliver better sessions — so your clients keep coming back.</p>
 
     <form
-      id="waitlist"
+      id="signup"
       class="waitlist-form"
       action="https://formspree.io/f/mrerapkk"
       method="POST"
     >
       <input type="text" name="name" placeholder="Your name" required autocomplete="name">
       <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
-      <button type="submit">Join the waitlist &rarr;</button>
-      <p class="form-note">No spam. We'll reach out when your spot is ready.</p>
+      <button type="submit">Sign up &rarr;</button>
     </form>
-    <div class="success-msg" id="success-hero">You're on the list. We'll be in touch.</div>
+    <div class="success-msg" id="success-hero">You're in. We'll reach out to get you set up.</div>
   </section>
 
   <!-- PROBLEM -->
@@ -399,7 +398,7 @@
   <!-- FINAL CTA -->
   <section class="final-cta">
     <h2>Your clients deserve a trainer<br>who has it together.</h2>
-    <p>Join the waitlist. We're onboarding trainers now — manually, one by one.</p>
+    <p>We're onboarding trainers now, one by one.</p>
     <form
       class="waitlist-form"
       action="https://formspree.io/f/mrerapkk"
@@ -408,10 +407,9 @@
     >
       <input type="text" name="name" placeholder="Your name" required autocomplete="name">
       <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
-      <button type="submit">Join the waitlist &rarr;</button>
-      <p class="form-note">No spam. We'll reach out when your spot is ready.</p>
+      <button type="submit">Sign up &rarr;</button>
     </form>
-    <div class="success-msg" id="success-footer">You're on the list. We'll be in touch.</div>
+    <div class="success-msg" id="success-footer">You're in. We'll reach out to get you set up.</div>
   </section>
 
   <!-- FOOTER -->
@@ -435,7 +433,7 @@
           });
           if (res.ok) {
             form.style.display = 'none';
-            const successId = i === 0 ? 'success-hero' : 'success-footer';
+            const successId = form.id === 'signup' ? 'success-hero' : 'success-footer';
             document.getElementById(successId).style.display = 'block';
           } else {
             btn.textContent = 'Join the waitlist →';
