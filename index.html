@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abra — Practice management for personal trainers</title>
+  <meta name="description" content="Stop chasing payments on WhatsApp. Abra helps personal trainers send professional invoices, track client notes, and manage their schedule.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #533afd;
+      --purple-light: #e8e9ff;
+      --purple-dark: #3d27e0;
+      --text: #061b31;
+      --text-muted: #50617a;
+      --border: #d8dee4;
+      --bg: #ffffff;
+      --bg-subtle: #f8fafd;
+      --radius: 10px;
+      --font: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .nav-cta {
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .nav-cta:hover { background: var(--purple-dark); }
+
+    /* HERO */
+    .hero {
+      padding: 96px 24px 80px;
+      text-align: center;
+      background: radial-gradient(103.24% 102.63% at 50% 102.63%, rgb(72, 111, 253) 0px, rgb(127, 129, 243) 9.84%, rgb(196, 137, 255) 20.83%, rgb(218, 192, 255) 34.13%, rgb(234, 220, 255) 44.86%, rgb(249, 246, 255) 58.59%, rgb(248, 250, 253) 100%);
+    }
+    .hero-label {
+      display: inline-block;
+      background: var(--purple-light);
+      color: var(--purple);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      max-width: 720px;
+      margin: 0 auto 20px;
+    }
+    .hero h1 span { color: var(--purple); }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    /* FORM */
+    .waitlist-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .waitlist-form input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .waitlist-form input:focus { border-color: var(--purple); }
+    .waitlist-form input::placeholder { color: #a0aec0; }
+    .waitlist-form button {
+      width: 100%;
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .waitlist-form button:hover { background: var(--purple-dark); }
+    .waitlist-form button:active { transform: scale(0.99); }
+    .form-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    /* PROBLEM SECTION */
+    .problem {
+      padding: 80px 24px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .problem-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--purple);
+      margin-bottom: 16px;
+    }
+    .problem h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .problem p {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* FEATURES */
+    .features {
+      padding: 80px 24px;
+      background: var(--bg-subtle);
+      border-top: 1px solid var(--border);
+    }
+    .features-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .features-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .features-header h2 {
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      margin-bottom: 12px;
+    }
+    .features-header p {
+      font-size: 17px;
+      color: var(--text-muted);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+    }
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--purple-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+    .feature-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* QUOTE */
+    .quote-section {
+      padding: 80px 24px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .quote-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .quote-mark {
+      font-size: 64px;
+      color: var(--purple-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .quote-text {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .quote-author {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .quote-author strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* FINAL CTA */
+    .final-cta {
+      padding: 96px 24px;
+      background: var(--bg-subtle);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .final-cta h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+    .final-cta p {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    footer p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* SUCCESS MESSAGE */
+    .success-msg {
+      display: none;
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      color: #2e7d32;
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 72px 20px 64px; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Abra</a>
+      <a href="#waitlist" class="nav-cta">Join waitlist</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">Now in private beta</div>
+    <h1>Stop chasing clients<br>for <span>payment</span>.</h1>
+    <p>Abra is practice management software for personal trainers. Send beautiful invoices, track client notes, manage your schedule.</p>
+
+    <form
+      id="waitlist"
+      class="waitlist-form"
+      action="https://formspree.io/f/mrerapkk"
+      method="POST"
+    >
+      <input type="text" name="name" placeholder="Your name" required autocomplete="name">
+      <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+      <button type="submit">Join the waitlist &rarr;</button>
+      <p class="form-note">No spam. We'll reach out when your spot is ready.</p>
+    </form>
+    <div class="success-msg" id="success-hero">You're on the list. We'll be in touch.</div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem">
+    <div class="problem-inner">
+      <p class="section-label">The problem</p>
+      <h2>WhatsApp, bank transfers, and trying to remember.</h2>
+      <p>Most personal trainers are running their business on a combination of WhatsApp messages, manual bank transfers, and memory. It works — until it doesn't. Payments get chased. Client details get forgotten. Sessions blur together. Abra fixes that.</p>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="features-inner">
+      <div class="features-header">
+        <h2>Everything you need. Nothing you don't.</h2>
+        <p>Built by a Muay Thai trainer, for trainers who work with clients one-on-one.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📄</div>
+          <h3>Professional invoices</h3>
+          <p>Send beautiful, branded invoices directly to your clients after every session. No Google Docs. No chasing on WhatsApp.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>Client notes</h3>
+          <p>Track each client's progress, injuries, and focus areas. Walk into every session knowing exactly where you left off.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h3>Schedule management</h3>
+          <p>See your week at a glance. Log sessions, track what's paid, and know exactly where your time is going.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <div class="quote-inner">
+      <div class="quote-mark">"</div>
+      <p class="quote-text">The invoice isn't an admin task. It's the last impression you leave with your client after every session. Make it count.</p>
+      <p class="quote-author"><strong>Daniel Abraham</strong> &mdash; Muay Thai trainer &amp; founder of Abra</p>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h2>Ready to run your training<br>like a business?</h2>
+    <p>Join the waitlist. We're onboarding trainers now.</p>
+    <form
+      class="waitlist-form"
+      action="https://formspree.io/f/mrerapkk"
+      method="POST"
+      style="margin: 0 auto;"
+    >
+      <input type="text" name="name" placeholder="Your name" required autocomplete="name">
+      <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+      <button type="submit">Join the waitlist &rarr;</button>
+      <p class="form-note">No spam. We'll reach out when your spot is ready.</p>
+    </form>
+    <div class="success-msg" id="success-footer">You're on the list. We'll be in touch.</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Abra. Built by a trainer, for trainers.</p>
+  </footer>
+
+  <script>
+    // Formspree AJAX submission for both forms
+    document.querySelectorAll('.waitlist-form').forEach((form, i) => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('button');
+        btn.textContent = 'Submitting...';
+        btn.disabled = true;
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            form.style.display = 'none';
+            const successId = i === 0 ? 'success-hero' : 'success-footer';
+            document.getElementById(successId).style.display = 'block';
+          } else {
+            btn.textContent = 'Join the waitlist →';
+            btn.disabled = false;
+            alert('Something went wrong. Please try again.');
+          }
+        } catch {
+          btn.textContent = 'Join the waitlist →';
+          btn.disabled = false;
+          alert('Something went wrong. Please try again.');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
